@@ -25,11 +25,7 @@ const checkPass = async (req, res, next) => {
     const match = await bcrypt.compare(req.body.password, req.user.password);
 
     if (!match) {
-      const error = new Error("Passwords do not match");
-      res.status(401).json({
-        errorMessage: error.message,
-        error: error
-      });
+      throw new Error("Passwords do not match");
     } else { next() }
   } catch (error) {
     res.status(501).json({
