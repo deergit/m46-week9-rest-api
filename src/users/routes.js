@@ -9,9 +9,9 @@ userRouter.get("/users/getallusers", getAllUsers);
 
 userRouter.get("/users/getuser/:username", getUserByName);
 
-userRouter.put("/users/updateuser", updateUser);
+userRouter.put("/users/updateuser/:username", updateUser);
 
-userRouter.delete("/users/deleteuser", deleteUser);
+userRouter.delete("/users/deleteuser/:username", deleteUser);
 
 userRouter.delete("/users/deleteallusers", deleteAllUsers);
 

@@ -52,11 +52,11 @@ const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.findOne({ where: { username: req.params.username } });
 
-    updatedUser.username = req.body.username ?? updateUser.username;
-    updatedUser.email = req.body.email ?? updateUser.email;
-    updatedUser.password = req.body.password ?? updateUser.password;
+    updatedUser.username = req.body.username ?? updatedUser.username;
+    updatedUser.email = req.body.email ?? updatedUser.email;
+    updatedUser.password = req.body.password ?? updatedUser.password;
 
-    await updateUser.save();
+    await updatedUser.save();
 
     res.status(201).json({
       message: "Success",
