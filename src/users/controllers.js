@@ -56,7 +56,8 @@ const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.update(
       { [req.body.key]: req.body.value },
-      { where: { username: req.params.username } });
+      { where: { username: req.params.username } }
+    );
 
     res.status(201).json({
       message: "Success",
