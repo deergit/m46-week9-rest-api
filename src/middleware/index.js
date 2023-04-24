@@ -52,7 +52,6 @@ const checkEmail = async (req, res, next) => {
           error: error
         });
       }
-    next();
   } catch (error) {
     res.status(501).json({
       errorMessage: error.message,
