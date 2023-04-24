@@ -8,7 +8,8 @@ const registerUser = async (req, res) => {
       message: "Success",
       newUser: {
         username: newUser.username,
-        email: newUser.email
+        email: newUser.email,
+        password: "hidden"
       }
     });
   } catch (error) {
@@ -65,7 +66,8 @@ const updateUser = async (req, res) => {
       message: "Success",
       updatedUser: {
         username: updatedUser.username,
-        email: updatedUser.email
+        email: updatedUser.email,
+        password: "hidden"
       }
     });
   } catch (error) {
