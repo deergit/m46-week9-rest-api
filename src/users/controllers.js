@@ -6,11 +6,7 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({
       message: "Success",
-      newUser: {
-        username: newUser.username,
-        email: newUser.email,
-        password: "hidden"
-      }
+      newUser: newUser
     });
   } catch (error) {
     res.status(501).json({
@@ -61,11 +57,7 @@ const updateUser = async (req, res) => {
 
     res.status(201).json({
       message: "Success",
-      updatedUser: {
-        username: updatedUser.username,
-        email: updatedUser.email,
-        password: "hidden"
-      }
+      updatedUser: updatedUser
     });
   } catch (error) {
     res.status(501).json({
