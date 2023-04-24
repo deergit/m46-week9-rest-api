@@ -1,12 +1,15 @@
 const User = require("./model");
 
-const addUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
     res.status(201).json({
       message: "Success",
-      newUser: newUser
+      newUser: {
+        username: newUser.username,
+        email: newUser.email
+      }
     });
   } catch (error) {
     res.status(501).json({
@@ -60,7 +63,10 @@ const updateUser = async (req, res) => {
 
     res.status(201).json({
       message: "Success",
-      updateResult: updatedUser
+      updatedUser: {
+        username: updatedUser.username,
+        email: updatedUser.email
+      }
     });
   } catch (error) {
     res.status(501).json({
@@ -103,7 +109,7 @@ const deleteAllUsers = async (req, res) => {
 }
 
 module.exports = {
-  addUser,
+  registerUser,
   getAllUsers,
   getUserByName,
   updateUser,
