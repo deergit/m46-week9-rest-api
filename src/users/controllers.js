@@ -50,12 +50,13 @@ const getUserByName = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.update({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
-    },
-      { where: { username: req.params.username } });
+    const updatedUser = await User.findOne({ where: { username: req.params.username } });
+
+    updatedUser.username = req.body.username ?? updateUser.username;
+    updatedUser.email = req.body.email ?? updateUser.email;
+    updatedUser.password = req.body.password ?? updateUser.password;
+
+    await updateUser.save();
 
     res.status(201).json({
       message: "Success",
