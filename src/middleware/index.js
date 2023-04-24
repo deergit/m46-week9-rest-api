@@ -44,14 +44,12 @@ const checkEmail = async (req, res, next) => {
     if (String(req.body.email).toLowerCase().match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )) {
-        console.log("valid email");
         next();
-      } else {
-        res.status(400).json({
-          errorMessage: error.message,
-          error: error
-        });
-      }
+    } else {
+      res.status(400).json({
+        errorMessage: "invalid email"
+      });
+    }
   } catch (error) {
     res.status(501).json({
       errorMessage: error.message,

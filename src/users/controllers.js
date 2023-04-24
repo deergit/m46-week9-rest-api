@@ -1,6 +1,7 @@
 const User = require("./model");
 
 const registerUser = async (req, res) => {
+  console.log("reached controller")
   try {
     const newUser = await User.create(req.body);
 
