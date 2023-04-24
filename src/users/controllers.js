@@ -48,6 +48,23 @@ const getUserByName = async (req, res) => {
   }
 }
 
+const loginUser = async (req, res) => {
+  try {
+    res.status(200).json({
+      message: "Login success!",
+      user: {
+        username: req.body.username,
+        email: req.body.email
+      }
+    });
+  } catch (error) {
+    res.status(501).json({
+      errorMessage: error.message,
+      error: error
+    });
+  }
+}
+
 const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.update(
@@ -103,6 +120,7 @@ module.exports = {
   registerUser,
   getAllUsers,
   getUserByName,
+  loginUser,
   updateUser,
   deleteUser,
   deleteAllUsers
