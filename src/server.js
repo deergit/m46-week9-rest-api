@@ -10,7 +10,7 @@ app.use(express.json());
 
 const syncTables = () => {
   // for later syncing of tables
-  // User.sync();
+  User.sync();
 }
 
 app.use(userRouter);
