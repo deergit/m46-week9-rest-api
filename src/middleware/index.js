@@ -26,7 +26,9 @@ const checkPass = async (req, res, next) => {
 
     if (!match) {
       throw new Error("Passwords do not match");
-    } else { next() }
+    } else {
+      next()
+    }
   } catch (error) {
     res.status(501).json({
       errorMessage: error.message,
