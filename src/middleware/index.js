@@ -30,7 +30,7 @@ const checkPass = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(501).json({
+    res.status(401).json({
       errorMessage: error.message,
       error: error
     });
