@@ -62,6 +62,7 @@ const checkToken = async (req, res, next) => {
     if (!req.header("Authorization")) { throw new Error("No header, token, or user found") }
 
     const token = req.header("Authorization").replace("Bearer ", "");
+
     const dcToken = jwt.verify(token, process.env.SECRET_KEY);
     const user = await User.findOne({ where: { id: dcToken.id } });
 
