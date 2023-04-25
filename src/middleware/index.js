@@ -66,7 +66,7 @@ const checkToken = async (req, res, next) => {
     const user = await User.findOne({ where: { id: dcToken.id } });
 
     if (!user) { throw new Error("No header, token, or user found") }
-
+    req.authUser = user;
     next();
   } catch (error) {
     res.status(501).json({
