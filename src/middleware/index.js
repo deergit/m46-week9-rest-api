@@ -22,13 +22,13 @@ const checkPass = async (req, res, next) => {
   try {
     req.user = await User.findOne({ where: { username: req.body.username } });
 
+    if (!req.user) { throw new Error("Password or username does not match") }
+
     const match = await bcrypt.compare(req.body.password, req.user.password);
 
-    if (!match) {
-      throw new Error("Passwords do not match");
-    } else {
-      next();
-    }
+    if (!match) { throw new Error("Password or username does not match") }
+
+    next();
   } catch (error) {
     res.status(501).json({
       errorMessage: error.message,
