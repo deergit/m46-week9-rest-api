@@ -23,6 +23,7 @@ const getAllUsers = async (req, res) => {
 
     res.status(200).json({
       message: "Success",
+      authUser: req.authUser,
       items: userList
     });
   } catch (error) {
@@ -51,6 +52,17 @@ const getUserByName = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    if (req.authUser) {
+      res.status(200).json({
+        message: "Login success!",
+        user: {
+          username: req.user.username,
+          email: req.user.email,
+          token: token
+        }
+      });
+    }
+
     const token = jwt.sign({ id: req.user.id }, process.env.SECRET_KEY);
 
     res.status(200).json({
