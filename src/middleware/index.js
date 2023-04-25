@@ -59,12 +59,14 @@ const checkEmail = async (req, res, next) => {
 
 const checkToken = async (req, res, next) => {
   try {
-    if (!req.header("Authorization")) { throw new Error("No header or token found") }
+    if (!req.header("Authorization")) { throw new Error("No header, token, or user found") }
 
     const token = req.header("Authorization").replace("Bearer ", "");
-    console.log(token);
     const dcToken = jwt.verify(token, process.env.SECRET_KEY);
-    console.log(dcToken);
+    const user = await User.findOne({ where: { id: dcToken.id } });
+
+    if (!user) { throw new Error("No header, token, or user found") }
+
     next();
   } catch (error) {
     res.status(501).json({

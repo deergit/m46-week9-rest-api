@@ -51,7 +51,7 @@ const getUserByName = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const token = await jwt.sign({ id: req.user.id }, process.env.SECRET_KEY);
+    const token = jwt.sign({ id: req.user.id }, process.env.SECRET_KEY);
 
     res.status(200).json({
       message: "Login success!",
