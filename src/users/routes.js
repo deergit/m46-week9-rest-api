@@ -12,6 +12,8 @@ userRouter.get("/users/getuser/:username", getUserByName);
 
 userRouter.post("/users/login", checkPass, loginUser);
 
+userRouter.get("/users/authcheck", checkToken, loginUser);
+
 userRouter.put("/users/updateuser/:username", updateUser);
 
 userRouter.delete("/users/deleteuser/:username", deleteUser);

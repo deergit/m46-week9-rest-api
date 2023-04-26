@@ -56,11 +56,11 @@ const loginUser = async (req, res) => {
       res.status(200).json({
         message: "Login success!",
         user: {
-          username: req.user.username,
-          email: req.user.email,
-          token: token
+          username: req.authUser.username,
+          email: req.authUser.email
         }
       });
+      return;
     }
 
     const token = jwt.sign({ id: req.user.id }, process.env.SECRET_KEY);
