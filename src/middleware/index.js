@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const User = require("../users/model");
 
@@ -56,8 +57,29 @@ const checkEmail = async (req, res, next) => {
   }
 }
 
+const checkToken = async (req, res, next) => {
+  try {
+    if (!req.header("Authorization")) { throw new Error("No header, token, or user found") }
+
+    const token = req.header("Authorization").replace("Bearer ", "");
+
+    const dcToken = jwt.verify(token, process.env.SECRET_KEY);
+    const user = await User.findOne({ where: { id: dcToken.id } });
+
+    if (!user) { throw new Error("No header, token, or user found") }
+    req.authUser = user;
+    next();
+  } catch (error) {
+    res.status(501).json({
+      errorMessage: error.message,
+      error: error
+    });
+  }
+}
+
 module.exports = {
   hashPass,
   checkPass,
-  checkEmail
+  checkEmail,
+  checkToken
 }
